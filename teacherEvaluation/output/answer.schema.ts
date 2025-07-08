@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import questionTypes from '../../types/questionTypes';
+import questionTypes from '../questionTypes';
 
 const publicAnswersSchema = z.object({
     evaluationId: z.coerce.number().int().positive("O ID da avaliação deve ser um número inteiro positivo."),
@@ -17,6 +17,8 @@ export const getPublicAnswersOutSchema = z.object({
     score: z.number().nullable(),
     evaluations: z.array(publicAnswersSchema)
 });
+
+export type GetPublicAnswersOut = z.infer<typeof getPublicAnswersOutSchema>;
 
 const publicEvaluationDetailsSchema = z.object({
     evaluationId: z.coerce.number().int().positive("O ID da avaliação deve ser um número inteiro positivo."),
@@ -46,3 +48,5 @@ export type PublicAnswerDetails = z.infer<typeof publicAnswerDetailsSchema>;
 export const getPublicAnswerDetailsOutSchema = publicEvaluationDetailsSchema.extend({
     answers: z.array(publicAnswerDetailsSchema)
 });
+
+export type GetPublicAnswerDetailsOut = z.infer<typeof getPublicAnswerDetailsOutSchema>;

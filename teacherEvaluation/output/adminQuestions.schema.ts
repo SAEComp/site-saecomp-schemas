@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import questionTypes from '../../types/questionTypes';
+import questionTypes from '../questionTypes';
 
 export const questionsSchema = z.object({
     id: z.coerce.number().int().positive("O ID da pergunta deve ser um número inteiro positivo."),

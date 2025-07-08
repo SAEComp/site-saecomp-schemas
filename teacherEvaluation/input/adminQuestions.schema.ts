@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import questionTypes from '../../types/questionTypes';
+import questionTypes from '../questionTypes';
 
 const questionObjectSchema = z.object({
     question: z.string().min(3, "A pergunta deve ter pelo menos 3 caracteres."),
