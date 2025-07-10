@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import questionTypes from '../../types/questionTypes';
+import questionTypes from '../questionTypes';
 
 const classesSchema = z.object({
     classId: z.coerce.number().int().positive("O ID da turma deve ser um número inteiro positivo."),
@@ -25,3 +25,5 @@ export const getActiveQuestionsOutSchema = z.object({
         required: z.boolean(),
     }))
 });
+
+export type ActiveQuestions = z.infer<typeof getActiveQuestionsOutSchema>['questions'];

@@ -4,10 +4,9 @@ export const userSchema = z.object({
     id: z.number(),
     name: z.string(),
     email: z.string().email(),
-    role: z.string(),
     roleId: z.number(),
     nusp: z.string(),
-    created_at: z.date(),
+    created_at: z.coerce.date(),
     active_sessions: z.number().int().nonnegative()
 });
 
