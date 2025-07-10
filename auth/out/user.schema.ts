@@ -15,3 +15,7 @@ export type UserList = z.infer<typeof userSchema>;
 export const listUsersOutSchema = z.object({
     result: z.array(userSchema)
 });
+
+export const createUserOutSchema = z.object({
+    id: z.number().int().positive()
+});

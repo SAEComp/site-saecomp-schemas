@@ -6,5 +6,5 @@ export const addPermissionInSchema = permissionSchema.omit({ id: true });
 export const editPermissionInSchema = permissionSchema;
 
 export const removePermissionInSchema = z.object({
-    id: z.number().int().positive(),
+    id: z.coerce.number().int().positive(),
 });

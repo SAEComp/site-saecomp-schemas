@@ -16,7 +16,7 @@ export const editRoleInSchema = roleSchema.omit({
 export type EditRoleIn = z.infer<typeof editRoleInSchema>;
 
 export const deleteRoleInSchema = z.object({
-    id: z.number().int().positive(),
+    id: z.coerce.number().int().positive(),
 });
 
 export const changeRoleSchema = z.object({
