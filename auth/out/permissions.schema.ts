@@ -5,7 +5,6 @@ export const permissionSchema = z.object({
     id: z.number().int().positive(),
     name: z.string(),
     description: z.string().nullable(),
-    userDefault: z.boolean().default(false),
 });
 
 export type Permission = z.infer<typeof permissionSchema>;
