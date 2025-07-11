@@ -6,7 +6,7 @@ export const getClassesInSchema = z.object({
 
 const answerSchema = z.object({
     questionId: z.number().int().positive(),
-    answer: z.string().min(1)
+    answer: z.string()
 });
 
 export type IAnswer = z.infer<typeof answerSchema>;
