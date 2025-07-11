@@ -12,7 +12,9 @@ const answerSchema = z.object({
 export type IAnswer = z.infer<typeof answerSchema>;
 
 const evaluationSchema = z.object({
-    classId: z.coerce.number().int().positive(),
+    classId: z.coerce.number().int().positive().optional(),
+    teacherId: z.coerce.number().int().positive().optional(),
+    courseId: z.coerce.number().int().positive().optional(),
     answers: z.array(answerSchema)
 });
 
