@@ -8,10 +8,10 @@ const publicAnswersSchema = z.object({
     courseName: z.string().min(3, "O nome do curso deve ter pelo menos 3 caracteres."),
     courseCode: z.string().min(3, "O código do curso deve ter pelo menos 3 caracteres."),
     score: z.number().nullable(),
-    instituteName: z.string().min(3, "O nome do instituto deve ter pelo menos 3 caracteres."),
-    instituteCode: z.string().min(3, "O código do instituto deve ter pelo menos 3 caracteres."),
-    departmentName: z.string().min(3, "O nome do departamento deve ter pelo menos 3 caracteres."),
-    departmentCode: z.string().min(3, "O código do departamento deve ter pelo menos 3 caracteres.")
+    instituteName: z.string(),
+    instituteCode: z.string(),
+    departmentName: z.string(),
+    departmentCode: z.string()
 });
 
 export type PublicAnswer = z.infer<typeof publicAnswersSchema>;
@@ -31,10 +31,10 @@ const publicEvaluationDetailsSchema = z.object({
     courseName: z.string().min(3, "O nome do curso deve ter pelo menos 3 caracteres."),
     courseCode: z.string().min(3, "O código do curso deve ter pelo menos 3 caracteres."),
     courseId: z.coerce.number().int().positive("O ID do curso deve ser um número inteiro positivo."),
-    instituteName: z.string().min(3, "O nome do instituto deve ter pelo menos 3 caracteres."),
-    instituteCode: z.string().min(3, "O código do instituto deve ter pelo menos 3 caracteres."),
-    departmentName: z.string().min(3, "O nome do departamento deve ter pelo menos 3 caracteres."),
-    departmentCode: z.string().min(3, "O código do departamento deve ter pelo menos 3 caracteres."),
+    instituteName: z.string(),
+    instituteCode: z.string(),
+    departmentName: z.string(),
+    departmentCode: z.string(),
 
 });
 
