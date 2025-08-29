@@ -4,6 +4,7 @@ import { z } from 'zod';
 export const getProductPageInSchema = z.object({
     pageSize: z.coerce.number(),
     page: z.coerce.number(),
+    category: z.enum(['sweet', 'salty', 'drink']).optional()
 });
 
 // Tipo do typescript
