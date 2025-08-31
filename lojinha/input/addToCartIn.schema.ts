@@ -3,7 +3,6 @@ import { z } from "zod";
 // Esquema de entrada para adição/atualização de produtos no carrinho do cliente
 export const addToCartInSchema = z.object({
     product_id: z.coerce.number(),
-    buy_order_id: z.coerce.number(),
     quantity: z.coerce.number()
 });
 
