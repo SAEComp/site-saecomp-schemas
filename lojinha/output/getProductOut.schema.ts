@@ -8,6 +8,7 @@ export const getProductOutSchema = z.object({
     description: z.string(),
     quantity: z.coerce.number(),
     bar_code: z.string().optional(),
+    img_url: z.string(),
     category: z.enum(['sweet', 'salty', 'drink']),
 });
 

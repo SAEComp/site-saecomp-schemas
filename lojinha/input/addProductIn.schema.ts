@@ -6,7 +6,8 @@ export const addProductInSchema = z.object({
     value: z.coerce.number(),
     description: z.string(),
     quantity: z.coerce.number(),
-    bar_code: z.string().optional(),
+    bar_code: z.string().length(13, {message: 'bar_code deve ter exatamente 13 caracteres'}).optional(),
+    img_url: z.string(),
     category: z.enum(['sweet', 'salty', 'drink']),
 });
 
