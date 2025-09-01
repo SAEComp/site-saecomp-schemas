@@ -2,7 +2,7 @@ import { z } from "zod";
 
 // Esquema de edição produtos
 export const editProductInSchema = z.object({
-    id: z.coerce.number(),
+    product_id: z.coerce.number(),
     name: z.string().optional(),
     value: z.coerce.number().optional(),
     description: z.string().optional(),
