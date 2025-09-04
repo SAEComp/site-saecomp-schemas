@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+// Esquema intermediário para item do carrinho
 const itemSchema = z.object({
     productId: z.coerce.number(),
     productName: z.string().min(1),
