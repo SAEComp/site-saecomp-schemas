@@ -1,18 +1,26 @@
 import { z } from "zod";
 
-// Esquema de entrada para paginação de pedidos de compra
-export const getBuyOrderPageOutSchema = z.object({
-    id: z.coerce.number(),
-    user_id: z.coerce.number(),
-    date: z.coerce.date(),
-    status: z.enum(['cart', 'pendingPayment', 'canceled' ,'finishedPayment']),
+// Esquema individual de item em um pedido de compra
+const itemSchema = z.object({
+    productName: z.string(),
+    quantity: z.coerce.number().min(1),
+    value: z.coerce.number().min(0),
 });
 
-// Vetor do esquema de saída
-export const getBuyOrderPageOutArraySchema = getBuyOrderPageOutSchema.array(); 
+// Esquema individual de pedido de compra na página de saída
+const buyOrderSchema = z.object({
+    id: z.coerce.number().min(1),
+    userName: z.string(),
+    date: z.coerce.date(),
+    status: z.enum(['cart', 'pendingPayment', 'canceled' ,'finishedPayment']),
+    totalValue: z.coerce.number(),
+    items: itemSchema.array()
+});
+
+// Esquema de entrada para paginação de pedidos de compra
+export const getBuyOrderPageOutSchema = z.object({
+    buyOrders: buyOrderSchema.array(),
+});
 
 // Tipo typescript
 export type ICGetBuyOrderPageOutSchema = z.infer<typeof getBuyOrderPageOutSchema>
-
-// Tipo typescript do vetor
-export type ICGetBuyOrderPageOutArraySchema = z.infer<typeof getBuyOrderPageOutArraySchema>

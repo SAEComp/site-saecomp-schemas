@@ -1,10 +1,15 @@
-import { z } from "zod";
+import { date, z } from "zod";
 
 // Esquema de entrada para paginação de pedidos de compra
 export const getBuyOrderPageInSchema = z.object({
-    page_size: z.coerce.number(),
-    page: z.coerce.number(),
-    status: z.enum(['cart', 'pendingPayment', 'finishedPayment']).optional()
+    pageSize: z.coerce.number().min(1),
+    page: z.coerce.number().min(1),
+    status: z.enum(['cart', 'pendingPayment', 'canceled' ,'finishedPayment']).optional(),
+    userName: z.string().optional(),
+    totalValueMin: z.coerce.number().optional(),
+    totalValueMax: z.coerce.number().optional(),
+    dateMin: z.coerce.date().optional(),
+    dateMax: z.coerce.date().optional(),
 });
 
 
