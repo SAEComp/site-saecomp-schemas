@@ -14,12 +14,12 @@ const buyOrderSchema = z.object({
     date: z.coerce.date(),
     status: z.enum(['cart', 'pendingPayment', 'canceled' ,'finishedPayment']),
     totalValue: z.coerce.number(),
-    items: itemSchema.array()
+    item: itemSchema.array()
 });
 
 // Esquema de entrada para paginação de pedidos de compra
 export const getBuyOrderPageOutSchema = z.object({
-    buyOrders: buyOrderSchema.array(),
+    buyOrder: z.array(buyOrderSchema).min(0),
 });
 
 // Tipo typescript

@@ -1,11 +1,19 @@
 import { z } from "zod";
 
+const itemSchema = z.object({
+    productId: z.coerce.number(),
+    productName: z.string().min(1),
+    productStock: z.coerce.number().min(1),
+    quantity: z.coerce.number().min(1),
+    value: z.coerce.number().min(0.01),
+});
+
 // Esquema de saída para produtos
 export const getCartOutSchema = z.object({
     id: z.coerce.number(),
-    user_id: z.coerce.number(),
-    date: z.coerce.date(),
-    status: z.enum(['cart', 'pendingPayment', 'canceled' ,'finishedPayment']),
+    changed: z.coerce.boolean(),
+    totalValue: z.coerce.number().min(0.01),
+    items: z.array(itemSchema).min(0),
 });
 
 
