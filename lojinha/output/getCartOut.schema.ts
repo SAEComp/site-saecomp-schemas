@@ -2,6 +2,7 @@ import { z } from "zod";
 
 // Esquema intermediário para item do carrinho
 const itemSchema = z.object({
+    id: z.coerce.number().min(1),
     productId: z.coerce.number(),
     productName: z.string().min(1),
     productStock: z.coerce.number().min(1),
