@@ -6,7 +6,7 @@ const entryHistorySchema = z.object({
     productId: z.coerce.number().min(1),
     productName: z.string(),
     value: z.coerce.number(),
-    quantity: z.coerce.number().min(0),
+    quantity: z.coerce.number(),
     date: z.coerce.date()
 });
 
