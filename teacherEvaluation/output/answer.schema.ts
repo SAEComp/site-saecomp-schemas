@@ -2,30 +2,31 @@ import { z } from 'zod';
 import questionTypes from '../questionTypes';
 
 const publicAnswersSchema = z.object({
-    evaluationId: z.coerce.number().int().positive("O ID da avaliação deve ser um número inteiro positivo."),
+    classId: z.coerce.number().int().positive("O ID da avaliação deve ser um número inteiro positivo."),
     teacherName: z.string().min(3, "O nome do professor deve ter pelo menos 3 caracteres."),
     teacherId: z.coerce.number().int().positive("O ID do professor deve ser um número inteiro positivo."),
     courseName: z.string().min(3, "O nome do curso deve ter pelo menos 3 caracteres."),
     courseCode: z.string().min(3, "O código do curso deve ter pelo menos 3 caracteres."),
-    score: z.number().nullable(),
+    courseId: z.coerce.number().int().positive(),
+    averageScore: z.number().nullable(),
     instituteName: z.string(),
     instituteCode: z.string(),
     departmentName: z.string(),
-    departmentCode: z.string()
+    departmentCode: z.string(),
+    semesterCode: z.string()
 });
 
 export type PublicAnswer = z.infer<typeof publicAnswersSchema>;
 
 export const getPublicAnswersOutSchema = z.object({
     isLastPage: z.boolean(),
-    score: z.number().nullable(),
-    evaluations: z.array(publicAnswersSchema)
+    teacherGeneralInfo: z.array(publicAnswersSchema)
 });
 
 export type GetPublicAnswersOut = z.infer<typeof getPublicAnswersOutSchema>;
 
 const publicEvaluationDetailsSchema = z.object({
-    evaluationId: z.coerce.number().int().positive("O ID da avaliação deve ser um número inteiro positivo."),
+    classId: z.coerce.number().int().positive("O ID da avaliação deve ser um número inteiro positivo."),
     teacherName: z.string().min(3, "O nome do professor deve ter pelo menos 3 caracteres."),
     teacherId: z.coerce.number().int().positive("O ID do professor deve ser um número inteiro positivo."),
     courseName: z.string().min(3, "O nome do curso deve ter pelo menos 3 caracteres."),
@@ -35,21 +36,23 @@ const publicEvaluationDetailsSchema = z.object({
     instituteCode: z.string(),
     departmentName: z.string(),
     departmentCode: z.string(),
-
+    averageScore: z.number().nullable(),
 });
 
 export type PublicEvaluationDetails = z.infer<typeof publicEvaluationDetailsSchema>;
 
 const publicAnswerDetailsSchema = z.object({
+    classId: z.coerce.number().int().positive("O ID da avaliação deve ser um número inteiro positivo."),
+    evaluationId : z.coerce.number().int().positive("O ID da avaliação deve ser um número inteiro positivo."),
     questionId: z.coerce.number().int().positive("O ID da pergunta deve ser um número inteiro positivo."),
     questionType: z.enum(questionTypes),
     question: z.string().min(3, "A pergunta deve ter pelo menos 3 caracteres."),
-    answer: z.string().nullable()
+    answerText: z.string().nullable()
 });
 
 export type PublicAnswerDetails = z.infer<typeof publicAnswerDetailsSchema>;
 
-export const getPublicAnswerDetailsOutSchema = publicEvaluationDetailsSchema.extend({
+export const getPublicAnswerDetailsOutSchema = z.object({
     answers: z.array(publicAnswerDetailsSchema)
 });
 
