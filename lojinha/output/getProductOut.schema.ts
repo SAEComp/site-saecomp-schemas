@@ -4,11 +4,11 @@ import { z } from "zod";
 export const getProductOutSchema = z.object({
     id: z.coerce.number(),
     name: z.string(),
-    value: z.coerce.number(),
+    value: z.number().refine(val => Number.isFinite(val) && /^\d+(\.\d{1,2})?$/.test(val.toString()), {message: "O valor deve ter no máximo 2 casas decimais"}),
     description: z.string(),
     quantity: z.coerce.number(),
-    bar_code: z.string().optional(),
-    img_url: z.string(),
+    barCode: z.string().optional().nullable(),
+    imgUrl: z.string().optional().nullable(),
     category: z.enum(['sweet', 'salty', 'drink']),
 });
 
