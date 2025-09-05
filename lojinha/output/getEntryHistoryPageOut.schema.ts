@@ -5,7 +5,7 @@ const entryHistorySchema = z.object({
     id: z.coerce.number().min(1),
     productId: z.coerce.number().min(1),
     productName: z.string(),
-    value: z.coerce.number(),
+    value: z.number().refine(val => Number.isFinite(val) && /^\d+(\.\d{1,2})?$/.test(val.toString()), {message: "O valor deve ter no máximo 2 casas decimais"}),
     quantity: z.coerce.number(),
     date: z.coerce.date()
 });

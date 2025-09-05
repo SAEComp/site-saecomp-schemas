@@ -7,7 +7,7 @@ export const getProductOutSchema = z.object({
     value: z.number().refine(val => Number.isFinite(val) && /^\d+(\.\d{1,2})?$/.test(val.toString()), {message: "O valor deve ter no máximo 2 casas decimais"}),
     description: z.string(),
     quantity: z.coerce.number(),
-    barCode: z.string().optional().nullable(),
+    barCode: z.string().length(13, {message: 'bar_code deve ter exatamente 13 caracteres'}).optional().nullable(),
     imgUrl: z.string().optional().nullable(),
     category: z.enum(['sweet', 'salty', 'drink']),
 });
