@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 // Schema inerente a cada entrada no histórico
-const entryHistorySchema = z.object({
+export const entryHistorySchema = z.object({
     id: z.coerce.number().min(1),
     productId: z.coerce.number().min(1),
     productName: z.string(),
