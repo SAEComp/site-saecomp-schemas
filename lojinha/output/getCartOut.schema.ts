@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 // Esquema intermediário para item do carrinho
-const itemSchema = z.object({
+export const itemCartSchema = z.object({
     id: z.coerce.number().min(1),
     productId: z.coerce.number(),
     productName: z.string().min(1),
@@ -15,7 +15,7 @@ export const getCartOutSchema = z.object({
     id: z.coerce.number(),
     changed: z.coerce.boolean(),
     totalValue: z.number().refine(val => Number.isFinite(val) && /^\d+(\.\d{1,2})?$/.test(val.toString()), {message: "O valor deve ter no máximo 2 casas decimais"}),
-    items: z.array(itemSchema).min(0),
+    items: z.array(itemCartSchema).min(0),
 });
 
 
