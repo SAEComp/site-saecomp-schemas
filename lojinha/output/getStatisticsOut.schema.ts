@@ -17,7 +17,7 @@ export const getStatisticsOutSchema = z.object({
     canceledOrders: z.coerce.number().min(0),
     stockProducts: z.coerce.number().min(0),
     stockItems: z.coerce.number().min(0),
-    productWithMoreSoldQuantity:  z.array(productsStatisticsSchema).min(0),
+    productsWithMoreSoldQuantity:  z.array(productsStatisticsSchema).min(0),
     productsWithMoreRevenueValue:  z.array(productsStatisticsSchema).min(0),
 });
 
