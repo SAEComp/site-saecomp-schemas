@@ -1,6 +1,8 @@
 import { z } from "zod";
+import { id } from "zod/v4/locales/index.cjs";
 
 export const paymentData = z.object({
+    paymentId: z.coerce.number(),
     qrCodeBase64: z.string(),     
     pixCopiaECola: z.string(),     
 });
