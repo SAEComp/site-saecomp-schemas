@@ -11,3 +11,4 @@ export const finishBuyOutSchema = z.object({
 });
 
 export type ICFinishBuyOutSchema = z.infer<typeof finishBuyOutSchema>;
+export type ICPaymentData = z.infer<typeof paymentData>
