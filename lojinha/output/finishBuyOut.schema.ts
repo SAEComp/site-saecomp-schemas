@@ -1,6 +1,8 @@
 import { z } from "zod";
+import { id } from "zod/v4/locales/index.cjs";
 
 export const paymentData = z.object({
+    paymentId: z.coerce.number(),
     qrCodeBase64: z.string(),     
     pixCopiaECola: z.string(),     
 });
@@ -11,3 +13,4 @@ export const finishBuyOutSchema = z.object({
 });
 
 export type ICFinishBuyOutSchema = z.infer<typeof finishBuyOutSchema>;
+export type ICPaymentData = z.infer<typeof paymentData>
