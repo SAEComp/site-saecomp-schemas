@@ -12,11 +12,11 @@ export const productsStatisticsSchema = z.object({
 export const getStatisticsOutSchema = z.object({
     totalRevenueValue: z.coerce.number().refine(val => Number.isFinite(val) && /^\d+(\.\d{1,2})?$/.test(val.toString()), {message: "O valor deve ter no máximo 2 casas decimais"}),
     totalOrders: z.coerce.number().min(0),
-    pendingOrders: z.coerce.number().min(0),
     finishedOrders: z.coerce.number().min(0),
     canceledOrders: z.coerce.number().min(0),
     stockProducts: z.coerce.number().min(0),
     stockItems: z.coerce.number().min(0),
+    soldItems: z.coerce.number().min(0),
     productsWithMoreSoldQuantity:  z.array(productsStatisticsSchema).min(0),
     productsWithMoreRevenueValue:  z.array(productsStatisticsSchema).min(0),
 });
