@@ -1,4 +1,4 @@
-import { date, z } from "zod";
+import { z } from "zod";
 
 // Esquema de entrada para paginação de pedidos de compra
 export const getBuyOrderPageInSchema = z.object({

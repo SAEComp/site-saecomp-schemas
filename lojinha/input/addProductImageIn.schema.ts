@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { productSchema } from "../output/getProductPageOut.schema";
 
 // Esquema de entrada para novos produtos
 export const addProductImageInSchema = z.object({
