@@ -1,4 +1,4 @@
-import { date, z } from "zod";
+import { z } from "zod";
 
 // Esquema de entrada para paginação de pedidos de compra
 export const getBuyOrderPageInSchema = z.object({
@@ -7,8 +7,14 @@ export const getBuyOrderPageInSchema = z.object({
     status: z.enum(['cart', 'pendingPayment', 'canceled' ,'finishedPayment']).optional(),
     productName: z.string().or(z.array(z.string())).optional(),
     userName: z.string().optional(),
-    totalValueMin: z.coerce.number().refine(val => Number.isFinite(val) && /^\d+(\.\d{1,2})?$/.test(val.toString()), {message: "O valor deve ter no máximo 2 casas decimais"}).optional(),
-    totalValueMax: z.coerce.number().refine(val => Number.isFinite(val) && /^\d+(\.\d{1,2})?$/.test(val.toString()), {message: "O valor deve ter no máximo 2 casas decimais"}).optional(),
+    totalValueMin: z.preprocess(
+        (val) => typeof val === "string" ? Number(val) : val,
+        z.coerce.number().transform(v => Math.round(v * 100) / 100)
+    ).optional(),
+    totalValueMax: z.preprocess(
+        (val) => typeof val === "string" ? Number(val) : val,
+        z.coerce.number().transform(v => Math.round(v * 100) / 100)
+    ).optional(),
     dateMin: z.coerce.date().optional(),
     dateMax: z.coerce.date().optional(),
 });

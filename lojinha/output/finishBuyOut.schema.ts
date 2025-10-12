@@ -7,7 +7,10 @@ export const paymentData = z.object({
 });
 
 export const finishBuyOutSchema = z.object({
-    totalValue: z.number().refine(val => Number.isFinite(val) && /^\d+(\.\d{1,2})?$/.test(val.toString()), {message: "O valor deve ter no máximo 2 casas decimais"}),     
+    totalValue: z.preprocess(
+        (val) => typeof val === "string" ? Number(val) : val,
+        z.coerce.number().transform(v => Math.round(v * 100) / 100)
+    ),     
     paymentData: paymentData,     
 });
 

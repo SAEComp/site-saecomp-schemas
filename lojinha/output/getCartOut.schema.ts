@@ -7,14 +7,20 @@ export const itemCartSchema = z.object({
     productName: z.string().min(1),
     productStock: z.coerce.number().min(1),
     quantity: z.coerce.number().min(1),
-    value: z.number().refine(val => Number.isFinite(val) && /^\d+(\.\d{1,2})?$/.test(val.toString()), {message: "O valor deve ter no máximo 2 casas decimais"}),
+    value: z.preprocess(
+        (val) => typeof val === "string" ? Number(val) : val,
+        z.coerce.number().transform(v => Math.round(v * 100) / 100)
+    )
 });
 
 // Esquema de saída para produtos
 export const getCartOutSchema = z.object({
     id: z.coerce.number(),
     changed: z.coerce.boolean(),
-    totalValue: z.number().refine(val => Number.isFinite(val) && /^\d+(\.\d{1,2})?$/.test(val.toString()), {message: "O valor deve ter no máximo 2 casas decimais"}),
+    totalValue: z.preprocess(
+        (val) => typeof val === "string" ? Number(val) : val,
+        z.coerce.number().transform(v => Math.round(v * 100) / 100)
+    ),
     items: z.array(itemCartSchema).min(0),
 });
 
