@@ -5,13 +5,19 @@ export const itemOrderSchema = z.object({
     id: z.coerce.number().min(1),
     productName: z.string(),
     quantity: z.coerce.number().min(1),
-    value: z.number().refine(val => Number.isFinite(val) && /^\d+(\.\d{1,2})?$/.test(val.toString()), {message: "O valor deve ter no máximo 2 casas decimais"}),
+    value: z.preprocess(
+        (val) => typeof val === "string" ? Number(val) : val,
+        z.coerce.number().transform(v => Math.round(v * 100) / 100)
+    )
 });
 
 // Esquema individual de pedido de compra (com itens embutidos)
 export const buyOrderSchema = z.object({
     id: z.coerce.number().min(1),
-    totalValue: z.number().refine(val => Number.isFinite(val) && /^\d+(\.\d{1,2})?$/.test(val.toString()), {message: "O valor deve ter no máximo 2 casas decimais"}),
+    totalValue: z.preprocess(
+        (val) => typeof val === "string" ? Number(val) : val,
+        z.coerce.number().transform(v => Math.round(v * 100) / 100)
+    ),    
     paymentId: z.coerce.number(),
     qrCodeBase64: z.string(),     
     pixCopiaECola: z.string(),     

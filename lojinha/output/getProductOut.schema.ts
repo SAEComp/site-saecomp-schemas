@@ -4,7 +4,10 @@ import { z } from "zod";
 export const getProductOutSchema = z.object({
     id: z.coerce.number(),
     name: z.string(),
-    value: z.number().refine(val => Number.isFinite(val) && /^\d+(\.\d{1,2})?$/.test(val.toString()), {message: "O valor deve ter no máximo 2 casas decimais"}),
+    value: z.preprocess(
+        (val) => typeof val === "string" ? Number(val) : val,
+        z.coerce.number().transform(v => Math.round(v * 100) / 100)
+    ),
     description: z.string(),
     quantity: z.coerce.number(),
     barCode: z.string().length(13, {message: 'bar_code deve ter exatamente 13 caracteres'}).optional().nullable(),

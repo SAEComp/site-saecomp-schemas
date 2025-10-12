@@ -5,12 +5,18 @@ export const productsStatisticsSchema = z.object({
     id: z.coerce.number().min(1),
     name: z.string(),
     soldQuantity: z.coerce.number().min(0),
-    revenueValue: z.number().refine(val => Number.isFinite(val) && /^\d+(\.\d{1,2})?$/.test(val.toString()), {message: "O valor deve ter no máximo 2 casas decimais"}),
+    revenueValue: z.preprocess(
+        (val) => typeof val === "string" ? Number(val) : val,
+        z.coerce.number().transform(v => Math.round(v * 100) / 100)
+    ),
 });
 
 // Esquema de saída para produtos
 export const getStatisticsOutSchema = z.object({
-    totalRevenueValue: z.coerce.number().refine(val => Number.isFinite(val) && /^\d+(\.\d{1,2})?$/.test(val.toString()), {message: "O valor deve ter no máximo 2 casas decimais"}),
+    totalRevenueValue: z.preprocess(
+        (val) => typeof val === "string" ? Number(val) : val,
+        z.coerce.number().transform(v => Math.round(v * 100) / 100)
+    ),
     totalOrders: z.coerce.number().min(0),
     finishedOrders: z.coerce.number().min(0),
     canceledOrders: z.coerce.number().min(0),
