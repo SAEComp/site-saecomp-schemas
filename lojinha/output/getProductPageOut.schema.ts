@@ -13,6 +13,7 @@ export const productSchema = z.object({
     barCode: z.string().length(13, {message: 'bar_code deve ter exatamente 13 caracteres'}).optional().nullable(),
     imgUrl: z.string().optional().nullable(),
     category: z.enum(['sweet', 'salty', 'drink']),
+    isActive: z.coerce.boolean()
 });
 
 // Esquema de saída para array de produtos
