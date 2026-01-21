@@ -21,7 +21,10 @@ export const getStatisticsOutSchema = z.object({
     finishedOrders: z.coerce.number().min(0),
     canceledOrders: z.coerce.number().min(0),
     stockProducts: z.coerce.number().min(0),
-    stockItems: z.coerce.number().min(0),
+    maxPotentialRevenue: z.preprocess(
+        (val) => typeof val === "string" ? Number(val) : val,
+        z.coerce.number().transform(v => Math.round(v * 100) / 100)
+    ),
     soldItems: z.coerce.number().min(0),
     productsWithMoreSoldQuantity:  z.array(productsStatisticsSchema).min(0),
     productsWithMoreRevenueValue:  z.array(productsStatisticsSchema).min(0),

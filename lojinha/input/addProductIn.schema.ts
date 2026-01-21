@@ -9,6 +9,7 @@ export const addProductInSchema = z.object({
     barCode: z.string().length(13, {message: 'bar_code deve ter exatamente 13 caracteres'}).optional(),
     imgUrl: z.string().optional(),
     category: z.enum(['sweet', 'salty', 'drink']),
+    isActive: z.boolean().optional()
 });
 
 

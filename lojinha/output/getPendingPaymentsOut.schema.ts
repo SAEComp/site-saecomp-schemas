@@ -17,7 +17,8 @@ export const buyOrderSchema = z.object({
     totalValue: z.preprocess(
         (val) => typeof val === "string" ? Number(val) : val,
         z.coerce.number().transform(v => Math.round(v * 100) / 100)
-    ),    
+    ),
+    date: z.coerce.date(),    
     paymentId: z.coerce.number(),
     qrCodeBase64: z.string(),     
     pixCopiaECola: z.string(),     
