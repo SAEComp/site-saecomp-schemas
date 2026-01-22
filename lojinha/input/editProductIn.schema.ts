@@ -10,7 +10,23 @@ export const editProductInSchema = z.object({
     barCode: z.string().length(13, {message: 'bar_code deve ter exatamente 13 caracteres'}).optional(),
     imgUrl: z.string().optional(),
     category: z.enum(['sweet', 'salty', 'drink']).optional(),
-    isActive: z.boolean().optional()
+    isActive: z
+        .preprocess((value) => {
+            if (typeof value === 'boolean') {
+                return value;
+            }
+            if (typeof value === 'string') {
+                const normalized = value.trim().toLowerCase();
+                if (normalized === 'true' || normalized === '1') {
+                    return true;
+                }
+                if (normalized === 'false' || normalized === '0') {
+                    return false;
+                }
+            }
+            return value;
+        }, z.boolean())
+        .optional()
 });
 
 
