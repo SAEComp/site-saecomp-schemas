@@ -23,6 +23,10 @@ export const addProductInSchema = z.object({
                     return false;
                 }
             }
+            if(typeof value === 'number'){
+                if(value === 1) return true;
+                if(value === 0) return false;
+            }
             return value;
         }, z.boolean())
         .optional()
